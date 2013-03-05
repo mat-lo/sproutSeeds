@@ -1,19 +1,39 @@
 package sproutseeds;
 
+import controlP5.ControlP5;
 import processing.core.PApplet;
 import processing.core.PFont;
-
-//test
-//yuu
 
 public class SproutSeeds extends PApplet {
 	
 	PFont droid;
+	ControlP5 cp5;
 
 	public void setup() {
 		
 		size(1024,800);
 		droid = loadFont("DroidSerif-96.vlw");
+		
+		cp5 = new ControlP5(this);
+		
+		cp5.setColorForeground(0xff000000);
+		cp5.setColorBackground(0xff808080);
+		cp5.setColorActive(0xff303030);
+		cp5.setControlFont(droid,15);
+		cp5.setColorLabel(0xff000000);
+
+		
+		 cp5.addSlider("Bitter")
+	     .setPosition(500,445)
+	     .setRange(0,30)
+	     .setSize(150,20);
+	     ;
+	     
+	     cp5.addSlider("Nutrients")
+	     .setPosition(500,478)
+	     .setRange(0,30)
+	     .setSize(150,20);
+	     ;
 		
 		smooth();
 	}
@@ -32,7 +52,7 @@ public class SproutSeeds extends PApplet {
 		
 		paragraph(190,16);				
 		sprout(380,550,mouseX/2);
-		holes(500,330,mouseX/30);
+		holes(500,330,21);
 		
 	}
 	
@@ -69,16 +89,21 @@ public class SproutSeeds extends PApplet {
 		noStroke();
 		fill(128);
 		int rectWidth = 200;
-		int rectMargin = 20;
+		int rectMargin = 22;
 		
-		float spacing = (rectWidth/2 - rectMargin) / 3;
+		float spacing = 28;
 		rect(left,top,rectWidth,rectWidth/2);
 		
 		fill(240);
-		for (int j = 0; j < rectWidth/2; j+= spacing) {
-			for(int i = 0; i < rectWidth/2; i+= spacing) {
-				ellipse(left+rectMargin/2+i,top+10+j,diam,diam);
+		for (int j = 0; j < 3; j+= 1) {
+			for(int i = 0; i < 3; i+= 1) {				
+				ellipse(left+rectMargin+i*spacing,top+rectMargin+j*spacing,diam,diam);
 			}
 		}
+		
+		textFont(droid,42);
+		text("4",left+110,top+rectWidth/4+10);
+		textFont(droid,24);
+		text("mm",left+140,top+rectWidth/4+10);
 	}
 }
